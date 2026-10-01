@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Search,
   ShoppingBag,
@@ -175,13 +176,18 @@ function Home() {
 
           {/* Desktop right actions */}
           <div className="hidden items-center gap-5 text-[13px] text-white md:flex">
-            <a href="#" className="transition-colors hover:text-[#D4FB20]">Sign In</a>
-            <a
-              href="#"
-              className="rounded-full border border-white/40 px-4 py-1.5 text-[12px] transition-all hover:bg-white hover:text-[#063BE8]"
-            >
-              Join Us
-            </a>
+            <Link
+  to="/login"
+  className="transition-colors hover:text-[#D4FB20]"
+>
+  Sign In
+</Link>
+            <Link
+  to="/register"
+  className="rounded-full border border-white/40 px-4 py-1.5 text-[12px] transition-all hover:bg-white hover:text-[#063BE8]"
+>
+  Join Us
+</Link>
             <ShoppingBag size={18} strokeWidth={1.8} />
           </div>
 
@@ -223,13 +229,18 @@ function Home() {
           </nav>
 
           <div className="mt-auto flex flex-col gap-4 px-6 pb-10">
-            <a href="#" className="text-[16px]">Sign In</a>
-            <a
-              href="#"
-              className="rounded-full bg-[#D4FB20] px-5 py-3 text-center text-[15px] font-bold text-black"
-            >
-              Join Us
-            </a>
+            <Link
+  to="/login"
+  className="transition-colors hover:text-[#D4FB20]"
+>
+  Sign In
+</Link>
+            <Link
+  to="/register"
+  className="rounded-full border border-white/40 px-4 py-1.5 text-[12px] transition-all hover:bg-white hover:text-[#063BE8]"
+>
+  Join Us
+</Link>
           </div>
         </div>
       </header>
