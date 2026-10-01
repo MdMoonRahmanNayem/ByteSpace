@@ -94,7 +94,7 @@ export default function Register() {
           </div>
 
           {/* TOP TEXT */}
-          <div className="absolute left-[40px] top-[85px] z-10">
+          <div className="absolute left-[40px] top-[55px] z-10">
 
             <h2 className="text-white text-[16px] font-semibold leading-tight">
               Sign up and come in

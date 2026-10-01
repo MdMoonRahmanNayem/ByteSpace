@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   Search,
@@ -23,12 +24,12 @@ import {
 const asset = (name) => `/src/assets/${name}`;
 
 const courses = [
-  { image: "course1.jpg", title: "Learn Figma from Basic",           creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
-  { image: "course2.jpg", title: "Build Digital Marketing Skills",   creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
-  { image: "course3.jpg", title: "Unlock the Power of Big Data",     creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
-  { image: "course4.jpg", title: "Balancing Productivity and Life",  creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
-  { image: "course5.jpg", title: "Mastering Money Management",       creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
-  { image: "course6.jpg", title: "From Idea to Startup Success",     creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "1", image: "course1.jpg", title: "Learn Figma from Basic", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "2", image: "course2.jpg", title: "Build Digital Marketing Skills", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "3", image: "course3.jpg", title: "Unlock the Power of Big Data", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "4", image: "course4.jpg", title: "Balancing Productivity and Life", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "5", image: "course5.jpg", title: "Mastering Money Management", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
+  { id: "6", image: "course6.jpg", title: "From Idea to Startup Success", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
 ];
 
 const categories = [
@@ -39,12 +40,12 @@ const categories = [
 ];
 
 const learningPaths = [
-  { icon: <Wrench size={20} />,           title: "Design"       },
-  { icon: <Code2 size={20} />,            title: "Development"  },
-  { icon: <Laptop size={20} />,           title: "IT & Software"},
-  { icon: <BriefcaseBusiness size={20} />,title: "Business"     },
-  { icon: <Megaphone size={20} />,        title: "Marketing"    },
-  { icon: <Camera size={20} />,           title: "Photography"  },
+  { icon: <Wrench size={20} />, title: "Design" },
+  { icon: <Code2 size={20} />, title: "Development" },
+  { icon: <Laptop size={20} />, title: "IT & Software" },
+  { icon: <BriefcaseBusiness size={20} />, title: "Business" },
+  { icon: <Megaphone size={20} />, title: "Marketing" },
+  { icon: <Camera size={20} />, title: "Photography" },
 ];
 
 const testimonials = [
@@ -148,102 +149,13 @@ function CourseCard({ course }) {
 ============================================================ */
 
 function Home() {
-  const [menuOpen,       setMenuOpen]       = useState(false);
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Featured");
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white text-[#111827]">
-
-      {/* ==================================================
-          NAVBAR
-      ================================================== */}
-
-      <header className="absolute left-0 right-0 top-0 z-[100]">
-        <nav className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between border-b border-white/10 px-6 lg:px-16">
-
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 text-white">
-            <img src={asset("logo.svg")} alt="ByteSpace" className="h-8 w-auto" />
-            <span className="text-[15px] font-bold">ByteSpace</span>
-          </a>
-
-          {/* Desktop nav links */}
-          <div className="hidden items-center gap-8 text-[13px] text-white md:flex">
-            <a href="#home"     className="transition-colors hover:text-[#D4FB20]">Home</a>
-            <a href="#courses"  className="transition-colors hover:text-[#D4FB20]">Courses</a>
-            <a href="#creators" className="transition-colors hover:text-[#D4FB20]">Creators</a>
-          </div>
-
-          {/* Desktop right actions */}
-          <div className="hidden items-center gap-5 text-[13px] text-white md:flex">
-            <Link
-  to="/login"
-  className="transition-colors hover:text-[#D4FB20]"
->
-  Sign In
-</Link>
-            <Link
-  to="/register"
-  className="rounded-full border border-white/40 px-4 py-1.5 text-[12px] transition-all hover:bg-white hover:text-[#063BE8]"
->
-  Join Us
-</Link>
-            <ShoppingBag size={18} strokeWidth={1.8} />
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            id="mobile-menu-open"
-            className="flex text-white md:hidden"
-            aria-label="Open menu"
-            onClick={() => setMenuOpen(true)}
-          >
-            <Menu size={26} />
-          </button>
-        </nav>
-
-        {/* ---- Mobile full-screen menu ---- */}
-        <div
-          className={`fixed inset-0 z-[200] flex flex-col bg-[#063BE8] text-white transition-all duration-300 md:hidden ${
-            menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <div className="flex items-center justify-between px-6 pt-6">
-            <a href="#" className="flex items-center gap-2">
-              <img src={asset("logo.svg")} alt="ByteSpace" className="h-8 w-auto" />
-              <span className="text-[15px] font-bold">ByteSpace</span>
-            </a>
-            <button
-              id="mobile-menu-close"
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              <X size={26} />
-            </button>
-          </div>
-
-          <nav className="mt-12 flex flex-col gap-7 px-6 text-[22px] font-semibold">
-            <a href="#home"     onClick={() => setMenuOpen(false)}>Home</a>
-            <a href="#courses"  onClick={() => setMenuOpen(false)}>Courses</a>
-            <a href="#creators" onClick={() => setMenuOpen(false)}>Creators</a>
-          </nav>
-
-          <div className="mt-auto flex flex-col gap-4 px-6 pb-10">
-            <Link
-  to="/login"
-  className="transition-colors hover:text-[#D4FB20]"
->
-  Sign In
-</Link>
-            <Link
-  to="/register"
-  className="rounded-full border border-white/40 px-4 py-1.5 text-[12px] transition-all hover:bg-white hover:text-[#063BE8]"
->
-  Join Us
-</Link>
-          </div>
-        </div>
-      </header>
 
       {/* ==================================================
           HERO
@@ -292,39 +204,54 @@ function Home() {
           </p>
 
           {/* Search Bar */}
-<div className="mt-7 flex w-full justify-center px-4">
-  <div className="flex w-full max-w-[470px] items-center gap-2">
-    
-    {/* Input */}
-    <div className="flex h-[42px] flex-1 items-center rounded-full bg-white px-4 shadow-sm">
-      <svg
-        className="mr-2 h-4 w-4 text-gray-400"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
-        />
-      </svg>
+          <div className="mt-7 flex w-full justify-center px-4">
+            <div className="flex w-full max-w-[470px] items-center gap-2">
 
-      <input
-        type="text"
-        placeholder="Course, topic, creator"
-        className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400"
-      />
-    </div>
+              {/* Input */}
+              <div className="flex h-[42px] flex-1 items-center rounded-full bg-white px-4 shadow-sm">
+                <svg
+                  className="mr-2 h-4 w-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+                  />
+                </svg>
 
-    {/* Search Button */}
-    <button className="h-[42px] rounded-full bg-[#D4FB20] px-6 text-sm font-medium text-black transition hover:bg-[#c5ed16]">
-      Search
-    </button>
+                <input
+                  type="text"
+                  placeholder="Course, topic, creator"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && searchQuery.trim()) {
+                      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                    }
+                  }}
+                  className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400"
+                />
+              </div>
 
-  </div>
-</div>
+              {/* Search Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (searchQuery.trim()) {
+                    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+                  }
+                }}
+                className="h-[42px] rounded-full bg-[#D4FB20] px-6 text-sm font-medium text-black transition hover:bg-[#c5ed16]"
+              >
+                Search
+              </button>
+
+            </div>
+          </div>
 
         </div>
 
@@ -372,7 +299,7 @@ function Home() {
           <p className="text-[11px] text-gray-500">Happy Students</p>
           <div className="mt-1.5 flex items-center gap-2">
             <div className="flex -space-x-2">
-              {["student-01.png","student-02.png","student-03.png","student-04.png","student-05.png","student-06.png"].map((img) => (
+              {["student-01.png", "student-02.png", "student-03.png", "student-04.png", "student-05.png", "student-06.png"].map((img) => (
                 <img
                   key={img}
                   src={asset(img)}
@@ -447,11 +374,10 @@ function Home() {
                 key={cat}
                 id={`cat-${cat.replace(/\s+/g, "-").toLowerCase()}`}
                 onClick={() => setActiveCategory(cat)}
-                className={`rounded-full px-4 py-[7px] text-[11px] font-medium transition-all ${
-                  activeCategory === cat
-                    ? "bg-[#D4FB20] text-black"
-                    : "bg-gray-100 text-gray-600 hover:bg-[#D4FB20] hover:text-black"
-                }`}
+                className={`rounded-full px-4 py-[7px] text-[11px] font-medium transition-all ${activeCategory === cat
+                  ? "bg-[#D4FB20] text-black"
+                  : "bg-gray-100 text-gray-600 hover:bg-[#D4FB20] hover:text-black"
+                  }`}
               >
                 {cat}
               </button>
@@ -635,7 +561,7 @@ function Home() {
               <div className="absolute bottom-[12%] right-0 rounded-xl bg-white px-3 py-2.5 shadow-lg">
                 <p className="text-[10px] text-gray-500">Happy Students</p>
                 <div className="mt-1.5 flex -space-x-2">
-                  {["student-01.png","student-02.png","student-03.png","student-04.png","student-05.png"].map((img) => (
+                  {["student-01.png", "student-02.png", "student-03.png", "student-04.png", "student-05.png"].map((img) => (
                     <img
                       key={img}
                       src={asset(img)}
@@ -790,97 +716,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ==================================================
-          FOOTER
-      ================================================== */}
 
-      <footer className="bg-white px-5 pb-6 pt-12 sm:px-8 lg:px-0">
-        <div className="mx-auto max-w-[1000px]">
-
-          <div className="grid gap-10 border-b border-gray-200 pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_2fr]">
-
-            {/* Newsletter */}
-            <div>
-              <div className="flex items-center gap-2">
-                <img src={asset("logo.svg")} alt="ByteSpace" className="h-7 w-auto" />
-                <span className="text-[14px] font-bold">ByteSpace</span>
-              </div>
-
-              <p className="mt-3 max-w-[280px] text-[12px] leading-[19px] text-gray-500">
-                Stay up to date with our latest features and releases by joining our newsletter.
-              </p>
-
-              <div className="mt-5 flex max-w-[300px] items-center rounded-full border border-gray-200 p-1.5">
-                <input
-                  id="newsletter-email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className="min-w-0 flex-1 bg-transparent px-3 text-[12px] outline-none"
-                />
-                <button
-                  id="newsletter-subscribe-btn"
-                  className="rounded-full bg-[#D4FB20] px-5 py-2 text-[11px] font-bold transition-colors hover:bg-[#c5ee10]"
-                >
-                  Subscribe
-                </button>
-              </div>
-
-              <p className="mt-2.5 text-[10px] text-gray-400">
-                By subscribing, you agree to our Privacy Policy and consent to
-                receive updates from our team.
-              </p>
-            </div>
-
-            {/* Link columns */}
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-              <div>
-                <h4 className="text-[12px] font-semibold">Featured Courses</h4>
-                <div className="mt-4 space-y-2.5 text-[12px] text-gray-500">
-                  {["Featured Categories","Business","IT","Design"].map((l) => (
-                    <p key={l} className="cursor-pointer transition-colors hover:text-[#063BE8]">{l}</p>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-[12px] font-semibold">Development</h4>
-                <div className="mt-4 space-y-2.5 text-[12px] text-gray-500">
-                  {["Marketing","Photography","Finance","Sport"].map((l) => (
-                    <p key={l} className="cursor-pointer transition-colors hover:text-[#063BE8]">{l}</p>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-[12px] font-semibold">Become a Creator</h4>
-                <div className="mt-4 space-y-2.5 text-[12px] text-gray-500">
-                  {["Affiliate Program","Contact","Help","About"].map((l) => (
-                    <p key={l} className="cursor-pointer transition-colors hover:text-[#063BE8]">{l}</p>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-[12px] font-semibold">Resources</h4>
-                <div className="mt-4 space-y-2.5 text-[12px] text-gray-500">
-                  {["Privacy","Terms","Cookies"].map((l) => (
-                    <p key={l} className="cursor-pointer transition-colors hover:text-[#063BE8]">{l}</p>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Copyright */}
-          <div className="flex flex-col gap-3 py-5 text-[11px] text-gray-400 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2025 ByteSpace. All rights reserved.</p>
-            <div className="flex gap-6">
-              {["Privacy Policy","Terms of Service","Cookie Settings"].map((l) => (
-                <span key={l} className="cursor-pointer transition-colors hover:text-gray-600">{l}</span>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </footer>
 
     </div>
   );

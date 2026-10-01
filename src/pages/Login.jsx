@@ -99,7 +99,7 @@ export default function Login() {
               <img
                 src={logo}
                 alt="ByteSpace"
-                className="w-[95px] h-auto object-contain"
+                className="w-[28px] h-auto object-contain"
               />
             </div>
 
