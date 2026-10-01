@@ -8,7 +8,7 @@ import {
   BarChart2,
 } from "lucide-react";
 
-const asset = (name) => `/src/assets/${name}`;
+const asset = (name) => `/assets/${name}`;
 
 const lessons = [
   {

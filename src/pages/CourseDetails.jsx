@@ -10,7 +10,7 @@ import {
   FileText,
 } from "lucide-react";
 
-const asset = (name) => `/src/assets/${name}`;
+const asset = (name) => `/assets/${name}`;
 
 const courses = {
   1: {

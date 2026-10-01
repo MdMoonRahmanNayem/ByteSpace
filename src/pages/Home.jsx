@@ -21,7 +21,7 @@ import {
    HELPERS & STATIC DATA  (outside component — no re-creation)
 ============================================================ */
 
-const asset = (name) => `/src/assets/${name}`;
+const asset = (name) => `/assets/${name}`;
 
 const courses = [
   { id: "1", image: "course1.jpg", title: "Learn Figma from Basic", creator: "purepat studio", price: "$25", rating: "4.5", level: "Beginner" },
